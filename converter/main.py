@@ -3,8 +3,7 @@ import sys
 import os
 import eyed3
 
-
-print("Playlist Converter")
+print("------------------ Playlist Converter ------------------")
 
 main_directory = "E:\A\Music"
 music_library = "E:\A\Music\Library"
@@ -12,14 +11,14 @@ playlist_in = ""
 playlist_name = ""
 
 
-def requestPlaylist():
+def request_playlist():
     playlist = input("Please enter the absolute path of the playlist file:\n")
     extension = ""
     if len(playlist) > 4:
-        extension = getExtension(playlist)
+        extension = get_extension(playlist)
     while not os.path.isfile(playlist) or extension != ".m3u":
         if len(playlist) > 4:
-            extension = getExtension(playlist)
+            extension = get_extension(playlist)
 
         if playlist.upper() == "EXIT":
             print("Program shutdown")
@@ -33,9 +32,8 @@ def requestPlaylist():
     print("Playlist file was found! Importing " + playlist)
     return playlist;
 
-#playlist_directory = os.path.dirname(playlist_in)
 
-def getExtension(input):
+def get_extension(input):
 
     # Reverse the filename to check whether it has a .m3u extension
     # If length is not more than 4 then it physically cannot have a .m3u extension
@@ -46,20 +44,22 @@ def getExtension(input):
         rev = rev[::-1]
     return rev;
 
-def requestOutputName():
+
+def request_output_name():
     name = input("Please enter a name for the converted playlist: ")
     while len(name) < 1:
         name = input("Invalid name. Please enter a valid name: ")
 
     # If the chosen filename does not include .m3u then add it
-    if getExtension(name) != ".m3u":
+    if get_extension(name) != ".m3u":
         name += ".m3u"
     return name;
 
+
 playlist_output_dir = "E:\A\Music\_python-playlists"
 
-playlist_in = requestPlaylist()
-playlist_name = requestOutputName()
+playlist_in = request_playlist()
+playlist_name = request_output_name()
 
 playlist_file = open(playlist_in, "r")
 
