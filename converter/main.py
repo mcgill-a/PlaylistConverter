@@ -13,7 +13,7 @@ playlist_name = ""
 
 
 def requestPlaylist():
-    playlist = input("Please enter the absolute path of the playlist file\n")
+    playlist = input("Please enter the absolute path of the playlist file:\n")
     while not os.path.exists(playlist):
         if playlist.upper() == "EXIT":
             print("Program shutdown")
@@ -71,12 +71,15 @@ for line in playlist_file:
 
         real_location = music_library + "\\" + primary_artist + "\\" + album + "\\" + line
 
-        if len(primary_artist) > 0 and len(album) > 0:
-            songs.append(real_location)
-            success_count += 1
+        if not os.path.isfile(real_location.rstrip()):
+            print("Warning: " + real_location.rstrip() + " does not exist in music library")
         else:
-            print("Failed to convert: " + file_path)
-            fail_count += 1
+            if len(primary_artist) > 0 and len(album) > 0:
+                songs.append(real_location)
+                success_count += 1
+            else:
+                print("Failed to convert: " + file_path)
+                fail_count += 1
     else:
         print("Failed to convert: " + file_path)
         fail_count += 1
@@ -91,8 +94,8 @@ playlist_file_out.writelines(songs)
 playlist_file_out.close()
 
 # Display conversion results
-print(success_count, "songs successfully converted.")
+print(success_count, "songs successfully converted")
 if fail_count == 1:
     print(fail_count, "song failed to convert")
 elif fail_count > 1:
-    print(fail_count, "songs failed to convert.")
+    print(fail_count, "songs failed to convert")
