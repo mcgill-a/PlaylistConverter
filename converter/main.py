@@ -14,11 +14,27 @@ playlist_name = ""
 
 def requestPlaylist():
     playlist = input("Please enter the absolute path of the playlist file:\n")
-    while not os.path.exists(playlist):
+    reversed = ""
+    if len(playlist) > 4:
+        reversed = playlist[::-1]
+        reversed = reversed[0:4]
+        reversed = reversed[::-1]
+    while not os.path.isfile(playlist) or reversed != ".m3u":
+        if len(playlist) > 4:
+            reversed = playlist[::-1]
+            reversed = reversed[0:4]
+            reversed = reversed[::-1]
+
         if playlist.upper() == "EXIT":
             print("Program shutdown")
             sys.exit(0)
-        playlist = input("Playlist file does not exist, please try again\n")
+        elif os.path.isdir(playlist):
+            playlist = input("'" + playlist + "' is a directory not a file, please try again:\n")
+        elif not os.path.isfile(playlist):
+            playlist = input("File does not exist, please try again:\n")
+        elif not reversed == ".m3u":
+            playlist = input("File is not of type M3U [playlist.m3u], please try again:\n")
+    print("Playlist file was found! Importing " + playlist)
     return playlist;
 
 #playlist_directory = os.path.dirname(playlist_in)
