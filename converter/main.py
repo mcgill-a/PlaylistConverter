@@ -14,16 +14,12 @@ playlist_name = ""
 
 def requestPlaylist():
     playlist = input("Please enter the absolute path of the playlist file:\n")
-    reversed = ""
+    extension = ""
     if len(playlist) > 4:
-        reversed = playlist[::-1]
-        reversed = reversed[0:4]
-        reversed = reversed[::-1]
-    while not os.path.isfile(playlist) or reversed != ".m3u":
+        extension = getExtension(playlist)
+    while not os.path.isfile(playlist) or extension != ".m3u":
         if len(playlist) > 4:
-            reversed = playlist[::-1]
-            reversed = reversed[0:4]
-            reversed = reversed[::-1]
+            extension = getExtension(playlist)
 
         if playlist.upper() == "EXIT":
             print("Program shutdown")
@@ -32,28 +28,31 @@ def requestPlaylist():
             playlist = input("'" + playlist + "' is a directory not a file, please try again:\n")
         elif not os.path.isfile(playlist):
             playlist = input("File does not exist, please try again:\n")
-        elif not reversed == ".m3u":
+        elif not extension == ".m3u":
             playlist = input("File is not of type M3U [playlist.m3u], please try again:\n")
     print("Playlist file was found! Importing " + playlist)
     return playlist;
 
 #playlist_directory = os.path.dirname(playlist_in)
 
+def getExtension(input):
+
+    # Reverse the filename to check whether it has a .m3u extension
+    # If length is not more than 4 then it physically cannot have a .m3u extension
+    rev = ""
+    if len(input) > 4:
+        rev = input[::-1]
+        rev = rev[0:4]
+        rev = rev[::-1]
+    return rev;
+
 def requestOutputName():
     name = input("Please enter a name for the converted playlist: ")
     while len(name) < 1:
         name = input("Invalid name. Please enter a valid name: ")
 
-    # Reverse the filename to check whether it has a .m3u extension
-    # If length is not more than 4 then it physically cannot have a .m3u extension
-    reversed = ""
-    if len(name) > 4:
-        reversed = name[::-1]
-        reversed = reversed[0:4]
-        reversed = reversed[::-1]
-
     # If the chosen filename does not include .m3u then add it
-    if not reversed == ".m3u":
+    if getExtension(name) != ".m3u":
         name += ".m3u"
     return name;
 
