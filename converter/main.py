@@ -3,9 +3,6 @@ import sys
 import os
 import eyed3
 
-print("------------------ Playlist Converter ------------------")
-
-main_directory = "E:\A\Music"  # probably not needed
 music_library = "E:\A\Music\Library"  # will eventually be specified by user
 playlist_in = ""
 playlist_name = ""
@@ -26,7 +23,7 @@ def request_playlist():
         elif os.path.isdir(playlist):
             playlist = input("'" + playlist + "' is a directory not a file, please try again:\n")
         elif not os.path.isfile(playlist):
-            playlist = input("File does not exist, please try again:\n")
+            playlist = input("File does not exist, please try again. Make sure you include the file extension!\n")
         elif not extension == ".m3u":
             playlist = input("File is not of type M3U [playlist.m3u], please try again:\n")
     print("Playlist file found! Importing " + playlist)
@@ -73,25 +70,20 @@ def absolute_or_relative():
         print("Relative path selected for playlist output")
     return result;
 
+print("------------------ Playlist Converter ------------------")
 
 output_format = absolute_or_relative()
 playlist_in = request_playlist()
 playlist_name = request_output_name()
-
 playlist_file = open(playlist_in, "r")
 
 songs = []
-
 success_count = 0;
 fail_count = 0;
 
 # Read playlist file and send results of each line to song list
 for line in playlist_file:
-
-    file_path = os.path.dirname(playlist_in) + "\\" + line
-    # implement this in the above line this in the above line
-    file_path = file_path.rstrip()
-
+    file_path = (os.path.dirname(playlist_in) + "\\" + line).rstrip()
     if os.path.isfile(file_path):
         audio_file = eyed3.load(file_path)
         artists = ""
