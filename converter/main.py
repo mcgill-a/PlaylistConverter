@@ -5,11 +5,11 @@ import eyed3
 
 print("------------------ Playlist Converter ------------------")
 
-main_directory = "E:\A\Music"
-music_library = "E:\A\Music\Library"
+main_directory = "E:\A\Music"  # probably not needed
+music_library = "E:\A\Music\Library"  # will eventually be specified by user
 playlist_in = ""
 playlist_name = ""
-
+playlist_output_dir = "E:\A\Music\_python-playlists"  # will eventually be specified by user
 
 def request_playlist():
     playlist = input("Please enter the absolute path of the playlist file:\n")
@@ -21,7 +21,7 @@ def request_playlist():
             extension = get_extension(playlist)
 
         if playlist.upper() == "EXIT":
-            print("Program shutdown")
+            print("Program exit")
             sys.exit(0)
         elif os.path.isdir(playlist):
             playlist = input("'" + playlist + "' is a directory not a file, please try again:\n")
@@ -42,7 +42,7 @@ def get_extension(input):
         rev = input[::-1]
         rev = rev[0:4]
         rev = rev[::-1]
-    return rev;
+    return rev.lower();
 
 
 def request_output_name():
@@ -51,13 +51,30 @@ def request_output_name():
         name = input("Invalid name. Please enter a valid name: ")
 
     # If the chosen filename does not include .m3u then add it
-    if get_extension(name) != ".m3u":
+    if get_extension(name.lower()) != ".m3u":
         name += ".m3u"
     return name;
 
 
-playlist_output_dir = "E:\A\Music\_python-playlists"
+# Ask the user if the program should output absolute or relative paths in the playlist file
+def absolute_or_relative():
+    print("Should the playlist conversion output absolute or relative paths?")
+    result = input("Please enter 'Absolute', 'Relative' or 'Exit': ").upper()
+    while result not in ['ABSOLUTE', 'RELATIVE', 'EXIT']:
+        result = input("Please enter 'Absolute', 'Relative' or 'Exit': ")
+        result = result.upper()
+        print("Result: " + result)
+    if result == 'EXIT':
+        print("Program exit")
+        sys.exit(0)
+    elif result == "ABSOLUTE":
+        print("Absolute path selected for playlist output")
+    elif result == "RELATIVE":
+        print("Relative path selected for playlist output")
+    return result;
 
+
+output_format = absolute_or_relative()
 playlist_in = request_playlist()
 playlist_name = request_output_name()
 
