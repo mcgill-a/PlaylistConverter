@@ -99,6 +99,7 @@ for line in playlist_file:
         relative_path = primary_artist + "\\" + album + "\\" + line
         if not os.path.isfile(absolute_path.rstrip()):
             print("Warning: " + absolute_path.rstrip() + " does not exist in music library")
+            fail_count += 1
         else:
             if len(primary_artist) > 0 and len(album) > 0:
                 if output_format == "ABSOLUTE":
@@ -130,8 +131,12 @@ playlist_file_out.writelines(songs)
 playlist_file_out.close()
 
 # Display conversion results
-print(success_count, "songs successfully converted")
-if fail_count == 1:
-    print(fail_count, "song failed to convert")
-elif fail_count > 1:
-    print(fail_count, "songs failed to convert")
+
+if fail_count == 0:
+    print("All songs successfully converted!")
+elif success_count == 0:
+    print("No songs were successfully converted")
+elif success_count == 1:
+    print(success_count, "/", (success_count+fail_count), "song successfully converted")
+else:
+    print(success_count, "/", (success_count+fail_count), "songs successfully converted")

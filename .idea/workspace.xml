@@ -63,13 +63,13 @@
         <counts>
           <entry key="Python Console" value="44" />
           <entry key="dummy" value="78" />
-          <entry key="py" value="7052" />
+          <entry key="py" value="7218" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="78" />
-          <entry key="Python" value="7096" />
+          <entry key="Python" value="7262" />
         </counts>
       </usages-collector>
     </session>
@@ -79,13 +79,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/converter/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1428">
-              <caret line="84" column="26" selection-start-line="84" selection-start-column="26" selection-end-line="84" selection-end-column="26" />
+            <state relative-caret-position="149">
+              <caret line="129" column="35" lean-forward="true" selection-start-line="129" selection-start-column="35" selection-end-line="129" selection-end-column="35" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
-                <marker date="1533477584555" expanded="true" signature="1502:1503" ph="..." />
-                <marker date="1533477584555" expanded="true" signature="1529:1840" ph="..." />
-                <marker date="1533477584555" expanded="true" signature="2574:2701" ph="..." />
+                <marker date="1533484129387" expanded="true" signature="1502:1503" ph="..." />
+                <marker date="1533484129387" expanded="true" signature="1529:1840" ph="..." />
+                <marker date="1533484129387" expanded="true" signature="2574:2701" ph="..." />
               </folding>
             </state>
           </provider>
@@ -106,6 +106,7 @@
       <find>path</find>
       <find>output</find>
       <find>full_name</find>
+      <find>after</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -234,7 +235,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2426869" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.45178765" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -255,13 +256,13 @@
     <entry file="file://$PROJECT_DIR$/main.py" />
     <entry file="file://$PROJECT_DIR$/converter/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1428">
-          <caret line="84" column="26" selection-start-line="84" selection-start-column="26" selection-end-line="84" selection-end-column="26" />
+        <state relative-caret-position="149">
+          <caret line="129" column="35" lean-forward="true" selection-start-line="129" selection-start-column="35" selection-end-line="129" selection-end-column="35" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <marker date="1533477584555" expanded="true" signature="1502:1503" ph="..." />
-            <marker date="1533477584555" expanded="true" signature="1529:1840" ph="..." />
-            <marker date="1533477584555" expanded="true" signature="2574:2701" ph="..." />
+            <marker date="1533484129387" expanded="true" signature="1502:1503" ph="..." />
+            <marker date="1533484129387" expanded="true" signature="1529:1840" ph="..." />
+            <marker date="1533484129387" expanded="true" signature="2574:2701" ph="..." />
           </folding>
         </state>
       </provider>
