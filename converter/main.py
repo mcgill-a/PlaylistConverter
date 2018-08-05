@@ -29,7 +29,7 @@ def request_playlist():
             playlist = input("File does not exist, please try again:\n")
         elif not extension == ".m3u":
             playlist = input("File is not of type M3U [playlist.m3u], please try again:\n")
-    print("Playlist file was found! Importing " + playlist)
+    print("Playlist file found! Importing " + playlist)
     return playlist;
 
 
@@ -85,41 +85,53 @@ songs = []
 success_count = 0;
 fail_count = 0;
 
+# Read playlist file and send results of each line to song list
 for line in playlist_file:
 
     file_path = os.path.dirname(playlist_in) + "\\" + line
+    # implement this in the above line this in the above line
     file_path = file_path.rstrip()
 
-    if os.path.exists(file_path):
-        audiofile = eyed3.load(file_path)
+    if os.path.isfile(file_path):
+        audio_file = eyed3.load(file_path)
         artists = ""
-        if audiofile.tag.artist is not None:
-            artists = audiofile.tag.artist
+        if audio_file.tag.artist is not None:
+            artists = audio_file.tag.artist
         artists = artists.split(',')
         primary_artist = artists[0]
         album = ""
-        if audiofile.tag.album is not None:
-            album = audiofile.tag.album
+        if audio_file.tag.album is not None:
+            album = audio_file.tag.album
 
-        real_location = music_library + "\\" + primary_artist + "\\" + album + "\\" + line
-
-        if not os.path.isfile(real_location.rstrip()):
-            print("Warning: " + real_location.rstrip() + " does not exist in music library")
+        absolute_path = music_library + "\\" + primary_artist + "\\" + album + "\\" + line
+        relative_path = primary_artist + "\\" + album + "\\" + line
+        if not os.path.isfile(absolute_path.rstrip()):
+            print("Warning: " + absolute_path.rstrip() + " does not exist in music library")
         else:
             if len(primary_artist) > 0 and len(album) > 0:
-                songs.append(real_location)
-                success_count += 1
+                if output_format == "ABSOLUTE":
+                    songs.append(absolute_path)
+                    success_count += 1
+                elif output_format == "RELATIVE":
+                    songs.append(relative_path)
+                    success_count += 1
             else:
                 print("Failed to convert: " + file_path)
                 fail_count += 1
     else:
         print("Failed to convert: " + file_path)
         fail_count += 1
-
 playlist_file.close()
 
-full_name = playlist_output_dir + "\\" + playlist_name
-playlist_file_out = open(full_name, "w", encoding='utf-8')
+# Playlist output location
+playlist_output_path = ""
+if output_format == "ABSOLUTE":
+    playlist_output_path = playlist_output_dir + "\\" + playlist_name
+elif output_format == "RELATIVE":
+    playlist_output_path = music_library + "\\" + playlist_name
+
+# Playlist output file operations
+playlist_file_out = open(playlist_output_path, "w", encoding='utf-8')
 playlist_file_out.write("# Converted with Playlist Converter by Alex McGill\n")
 playlist_file_out.write("# " + playlist_name + "\n")
 playlist_file_out.writelines(songs)
