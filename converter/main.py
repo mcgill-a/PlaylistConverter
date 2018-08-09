@@ -4,9 +4,8 @@ import os
 import eyed3
 
 music_library = "E:\A\Music\Library"  # will eventually be specified by user
-playlist_in = ""
-playlist_name = ""
 playlist_output_dir = "E:\A\Music\_python-playlists"  # will eventually be specified by user
+
 
 def request_playlist():
     playlist = input("Please enter the absolute path of the playlist file:\n")
@@ -18,7 +17,7 @@ def request_playlist():
             extension = get_extension(playlist)
 
         if playlist.upper() == "EXIT":
-            print("Program exit")
+            print("Thanks for using Playlist Converter!")
             sys.exit(0)
         elif os.path.isdir(playlist):
             playlist = input("'" + playlist + "' is a directory not a file, please try again:\n")
@@ -27,7 +26,7 @@ def request_playlist():
         elif not extension == ".m3u":
             playlist = input("File is not of type M3U [playlist.m3u], please try again:\n")
     print("Playlist file found! Importing " + playlist)
-    return playlist;
+    return playlist
 
 
 def get_extension(input):
@@ -39,104 +38,147 @@ def get_extension(input):
         rev = input[::-1]
         rev = rev[0:4]
         rev = rev[::-1]
-    return rev.lower();
+    return rev.lower()
 
 
 def request_output_name():
-    name = input("Please enter a name for the converted playlist: ")
+    name = input("Please enter a name for the converted playlist:\n")
     while len(name) < 1:
-        name = input("Invalid name. Please enter a valid name: ")
+        name = input("Invalid name. Please enter a valid name:\n")
 
     # If the chosen filename does not include .m3u then add it
     if get_extension(name.lower()) != ".m3u":
         name += ".m3u"
-    return name;
+    return name
 
 
 # Ask the user if the program should output absolute or relative paths in the playlist file
 def absolute_or_relative():
     print("Should the playlist conversion output absolute or relative paths?")
-    result = input("Please enter 'Absolute', 'Relative' or 'Exit': ").upper()
+    result = input("Please enter 'Absolute', 'Relative' or 'Exit':\n").upper()
     while result not in ['ABSOLUTE', 'RELATIVE', 'EXIT']:
-        result = input("Please enter 'Absolute', 'Relative' or 'Exit': ")
+        result = input("Please enter 'Absolute', 'Relative' or 'Exit':\n")
         result = result.upper()
         print("Result: " + result)
     if result == 'EXIT':
-        print("Program exit")
+        print("Thanks for using Playlist Converter!")
         sys.exit(0)
     elif result == "ABSOLUTE":
         print("Absolute path selected for playlist output")
     elif result == "RELATIVE":
         print("Relative path selected for playlist output")
-    return result;
+    return result
 
-print("------------------ Playlist Converter ------------------")
-
-output_format = absolute_or_relative()
-playlist_in = request_playlist()
-playlist_name = request_output_name()
-playlist_file = open(playlist_in, "r")
-
-songs = []
-success_count = 0;
-fail_count = 0;
 
 # Read playlist file and send results of each line to song list
-for line in playlist_file:
-    file_path = (os.path.dirname(playlist_in) + "\\" + line).rstrip()
-    if os.path.isfile(file_path):
-        audio_file = eyed3.load(file_path)
-        artists = ""
-        if audio_file.tag.artist is not None:
-            artists = audio_file.tag.artist
-        artists = artists.split(',')
-        primary_artist = artists[0]
-        album = ""
-        if audio_file.tag.album is not None:
-            album = audio_file.tag.album
+def get_playlist_songs():
+    attempts = 0
+    for line in playlist_file:
+        file_path = (os.path.dirname(playlist_in) + "\\" + line).rstrip()
+        attempts += 1
+        if os.path.isfile(file_path):
+            audio_file = eyed3.load(file_path)
+            artists = ""
+            if audio_file.tag.artist is not None:
+                artists = audio_file.tag.artist
+            artists = artists.split(',')
+            primary_artist = artists[0]
+            album = ""
+            if audio_file.tag.album is not None:
+                album = audio_file.tag.album
 
-        absolute_path = music_library + "\\" + primary_artist + "\\" + album + "\\" + line
-        relative_path = primary_artist + "\\" + album + "\\" + line
-        if not os.path.isfile(absolute_path.rstrip()):
-            print("Warning: " + absolute_path.rstrip() + " does not exist in music library")
-            fail_count += 1
-        else:
-            if len(primary_artist) > 0 and len(album) > 0:
-                if output_format == "ABSOLUTE":
-                    songs.append(absolute_path)
-                    success_count += 1
-                elif output_format == "RELATIVE":
-                    songs.append(relative_path)
-                    success_count += 1
+            absolute_path = music_library + "\\" + primary_artist + "\\" + album + "\\" + line
+            relative_path = primary_artist + "\\" + album + "\\" + line
+            if not os.path.isfile(absolute_path.rstrip()):
+                print("Warning: " + absolute_path.rstrip() + " does not exist in music library")
+                # fail_count += 1
             else:
-                print("Failed to convert: " + file_path)
-                fail_count += 1
-    else:
-        print("Failed to convert: " + file_path)
-        fail_count += 1
-playlist_file.close()
+                if len(primary_artist) > 0 and len(album) > 0:
+                    if output_format == "ABSOLUTE":
+                        songs.append(absolute_path)
+                        # success_count += 1
+                    elif output_format == "RELATIVE":
+                        songs.append(relative_path)
+                        # success_count += 1
+                else:
+                    print("Failed to convert: " + file_path)
+                    # fail_count += 1
+        else:
+            print("Failed to convert: " + file_path)
+            # fail_count += 1
+    playlist_file.close()
+    return attempts
 
-# Playlist output location
-playlist_output_path = ""
-if output_format == "ABSOLUTE":
-    playlist_output_path = playlist_output_dir + "\\" + playlist_name
-elif output_format == "RELATIVE":
-    playlist_output_path = music_library + "\\" + playlist_name
 
-# Playlist output file operations
-playlist_file_out = open(playlist_output_path, "w", encoding='utf-8')
-playlist_file_out.write("# Converted with Playlist Converter by Alex McGill\n")
-playlist_file_out.write("# " + playlist_name + "\n")
-playlist_file_out.writelines(songs)
-playlist_file_out.close()
+def playlist_output():
+    # Playlist output location
+    playlist_output_path = ""
+    if output_format == "ABSOLUTE":
+        playlist_output_path = playlist_output_dir + "\\" + playlist_name
+    elif output_format == "RELATIVE":
+        playlist_output_path = music_library + "\\" + playlist_name
+
+    # Playlist output file operations
+    playlist_file_out = open(playlist_output_path, "w", encoding='utf-8')
+    playlist_file_out.write("# Converted with Playlist Converter by Alex McGill\n")
+    playlist_file_out.write("# " + playlist_name + "\n")
+    playlist_file_out.writelines(songs)
+    playlist_file_out.close()
+
 
 # Display conversion results
+def display_results():
+    success_count = len(songs)
+    fail_count = attempt_count - success_count
 
-if fail_count == 0:
-    print("All songs successfully converted!")
-elif success_count == 0:
-    print("No songs were successfully converted")
-elif success_count == 1:
-    print(success_count, "/", (success_count+fail_count), "song successfully converted")
-else:
-    print(success_count, "/", (success_count+fail_count), "songs successfully converted")
+    if fail_count == 0:
+        print("All songs successfully converted!")
+    elif success_count == 0:
+        print("No songs were successfully converted")
+    elif success_count == 1:
+        print(success_count, "/", (success_count+fail_count), "song successfully converted")
+    else:
+        print(success_count, "/", (success_count+fail_count), "songs successfully converted")
+
+
+# Declaring variables
+playlist_in = ""
+playlist_name = ""
+
+output_format = ""
+playlist_in = ""
+playlist_name = ""
+playlist_file = ""
+
+songs = []
+attempt_count = ""
+
+while True:
+    print("------------------ Playlist Converter ------------------")
+
+    # Reset input playlist info
+    # playlist_in = ""
+    # playlist_name = ""
+
+    output_format = absolute_or_relative()
+    playlist_in = request_playlist()
+    playlist_name = request_output_name()
+    playlist_file = open(playlist_in, "r")
+
+    songs = []
+    attempt_count = get_playlist_songs()
+
+    playlist_output()
+    display_results()
+
+    print("--------------------------------------------------------")
+
+    repeat = input("\nWould you like to convert another playlist? (YES/NO):\n").strip()
+    while repeat.upper() not in ["YES", "NO"]:
+        repeat = input("Would you like to convert another playlist? (YES/NO):\n").strip()
+    if repeat.upper() == "NO":
+        print("Thanks for using Playlist Converter!")
+        sys.exit(0)
+    else:
+        print("\n")
+        continue
