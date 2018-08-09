@@ -15,7 +15,6 @@ def request_playlist():
     while not os.path.isfile(playlist) or extension != ".m3u":
         if len(playlist) > 4:
             extension = get_extension(playlist)
-
         if playlist.upper() == "EXIT":
             print("Thanks for using Playlist Converter!")
             sys.exit(0)
@@ -30,7 +29,6 @@ def request_playlist():
 
 
 def get_extension(input):
-
     # Reverse the filename to check whether it has a .m3u extension
     # If length is not more than 4 then it physically cannot have a .m3u extension
     rev = ""
@@ -45,7 +43,6 @@ def request_output_name():
     name = input("Please enter a name for the converted playlist:\n")
     while len(name) < 1:
         name = input("Invalid name. Please enter a valid name:\n")
-
     # If the chosen filename does not include .m3u then add it
     if get_extension(name.lower()) != ".m3u":
         name += ".m3u"
@@ -91,21 +88,16 @@ def get_playlist_songs():
             relative_path = primary_artist + "\\" + album + "\\" + line
             if not os.path.isfile(absolute_path.rstrip()):
                 print("Warning: " + absolute_path.rstrip() + " does not exist in music library")
-                # fail_count += 1
             else:
                 if len(primary_artist) > 0 and len(album) > 0:
                     if output_format == "ABSOLUTE":
                         songs.append(absolute_path)
-                        # success_count += 1
                     elif output_format == "RELATIVE":
                         songs.append(relative_path)
-                        # success_count += 1
                 else:
                     print("Failed to convert: " + file_path)
-                    # fail_count += 1
         else:
             print("Failed to convert: " + file_path)
-            # fail_count += 1
     playlist_file.close()
     return attempts
 
@@ -155,10 +147,6 @@ attempt_count = ""
 
 while True:
     print("------------------ Playlist Converter ------------------")
-
-    # Reset input playlist info
-    # playlist_in = ""
-    # playlist_name = ""
 
     output_format = absolute_or_relative()
     playlist_in = request_playlist()
