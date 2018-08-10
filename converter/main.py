@@ -3,6 +3,16 @@ import sys
 import os
 import eyed3
 
+"""
+ | Playlist Converter
+ | By Alex McGill
+ | Latest Update: 10/08/2018
+"""
+
+# Bold text formatting codes
+BOLD_START = '\033[1m'
+BOLD_END = '\033[0m'
+
 music_library = "E:\A\Music\Library"  # will eventually be specified by user
 playlist_output_dir = "E:\A\Music\_python-playlists"  # will eventually be specified by user
 
@@ -145,6 +155,7 @@ playlist_file = ""
 songs = []
 attempt_count = ""
 
+# Main program
 while True:
     print("------------------ Playlist Converter ------------------")
 
@@ -161,12 +172,11 @@ while True:
 
     print("--------------------------------------------------------")
 
-    repeat = input("\nWould you like to convert another playlist? (YES/NO):\n").strip()
-    while repeat.upper() not in ["YES", "NO"]:
-        repeat = input("Would you like to convert another playlist? (YES/NO):\n").strip()
-    if repeat.upper() == "NO":
+    repeat = input("\nWould you like to convert another playlist? " + BOLD_START + "(YES/NO)" + BOLD_END + ":\n")
+    while repeat.upper().strip() not in ["YES", "NO"]:
+        repeat = input("Would you like to convert another playlist? " + BOLD_START + "(YES/NO)" + BOLD_END + ":\n")
+    if repeat.upper().strip() == "NO":
         print("Thanks for using Playlist Converter!")
         sys.exit(0)
     else:
-        print("\n")
         continue
