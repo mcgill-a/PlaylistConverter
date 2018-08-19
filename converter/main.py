@@ -17,7 +17,8 @@ music_library = "E:\A\Music\Library"  # will eventually be specified by user
 playlist_output_dir = "E:\A\Music\_python-playlists"  # will eventually be specified by user
 
 
-def request_playlist():
+# Get the input playlist path
+def get_playlist():
     playlist = input("Please enter the absolute path of the playlist file:\n")
     extension = ""
     if len(playlist) > 4:
@@ -38,6 +39,7 @@ def request_playlist():
     return playlist
 
 
+# Get the file extension from the playlist
 def get_extension(input):
     # Reverse the filename to check whether it has a .m3u extension
     # If length is not more than 4 then it physically cannot have a .m3u extension
@@ -49,7 +51,8 @@ def get_extension(input):
     return rev.lower()
 
 
-def request_output_name():
+# Get a name for the playlist output
+def get_output_name():
     name = input("Please enter a name for the converted playlist:\n")
     while len(name) < 1:
         name = input("Invalid name. Please enter a valid name:\n")
@@ -112,8 +115,8 @@ def get_playlist_songs():
     return attempts
 
 
+# Create the new playlist file and add the songs to it
 def playlist_output():
-    # Playlist output location
     playlist_output_path = ""
     if output_format == "ABSOLUTE":
         playlist_output_path = playlist_output_dir + "\\" + playlist_name
@@ -160,8 +163,8 @@ while True:
     print("------------------ Playlist Converter ------------------")
 
     output_format = absolute_or_relative()
-    playlist_in = request_playlist()
-    playlist_name = request_output_name()
+    playlist_in = get_playlist()
+    playlist_name = get_output_name()
     playlist_file = open(playlist_in, "r")
 
     songs = []
