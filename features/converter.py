@@ -1,4 +1,3 @@
-import random
 import sys
 import os
 import eyed3
@@ -6,7 +5,7 @@ import eyed3
 """
  | Playlist Converter
  | By Alex McGill
- | Latest Update: 10/08/2018
+ | Latest Update: 24/08/2018
 """
 
 # Bold text formatting codes
