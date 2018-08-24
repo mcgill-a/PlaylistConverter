@@ -12,8 +12,6 @@ import eyed3
 BOLD_START = '\033[1m'
 BOLD_END = '\033[0m'
 
-playlist_output_dir = "E:\A\Music\_python-playlists"  # will eventually be specified by user
-
 
 # Get the path of the user music library directory
 def get_music_library():
@@ -126,7 +124,7 @@ def get_playlist_songs():
 def playlist_output():
     playlist_output_path = ""
     if output_format == "ABSOLUTE":
-        playlist_output_path = playlist_output_dir + "\\" + playlist_name
+        playlist_output_path = music_library + "\\" + playlist_name
     elif output_format == "RELATIVE":
         playlist_output_path = music_library + "\\" + playlist_name
 
