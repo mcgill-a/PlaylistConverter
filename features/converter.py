@@ -45,12 +45,12 @@ def get_playlist():
 
 
 # Get the file extension from the playlist
-def get_extension(input):
+def get_extension(ext):
     # Reverse the filename to check whether it has a .m3u extension
     # If length is not more than 4 then it physically cannot have a .m3u extension
     rev = ""
-    if len(input) > 4:
-        rev = input[::-1]
+    if len(ext) > 4:
+        rev = ext[::-1]
         rev = rev[0:4]
         rev = rev[::-1]
     return rev.lower()
@@ -122,11 +122,7 @@ def get_playlist_songs():
 
 # Create the new playlist file and add the songs to it
 def playlist_output():
-    playlist_output_path = ""
-    if output_format == "ABSOLUTE":
-        playlist_output_path = music_library + "\\" + playlist_name
-    elif output_format == "RELATIVE":
-        playlist_output_path = music_library + "\\" + playlist_name
+    playlist_output_path = music_library + "\\" + playlist_name
 
     # Playlist output file operations
     playlist_file_out = open(playlist_output_path, "w", encoding='utf-8')
