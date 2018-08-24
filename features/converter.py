@@ -101,7 +101,6 @@ def get_playlist_songs():
             album = ""
             if audio_file.tag.album is not None:
                 album = audio_file.tag.album
-
             absolute_path = music_library + "\\" + primary_artist + "\\" + album + "\\" + line
             relative_path = primary_artist + "\\" + album + "\\" + line
             if not os.path.isfile(absolute_path.rstrip()):
@@ -123,6 +122,11 @@ def get_playlist_songs():
 # Create the new playlist file and add the songs to it
 def playlist_output():
     playlist_output_path = music_library + "\\" + playlist_name
+
+    counter = 0
+    while os.path.isfile(playlist_output_path):
+        counter += 1
+        playlist_output_path += " (" + str(counter) + ")"
 
     # Playlist output file operations
     playlist_file_out = open(playlist_output_path, "w", encoding='utf-8')
@@ -160,10 +164,13 @@ songs = []
 attempt_count = ""
 
 # Main program
+run_count = 0
 while True:
     print("------------------ Playlist Converter ------------------")
 
-    music_library = get_music_library()
+    if run_count == 0:
+        music_library = get_music_library()
+
     output_format = absolute_or_relative()
     playlist_in = get_playlist()
     playlist_name = get_output_name()
@@ -184,4 +191,5 @@ while True:
         print("Thanks for using Playlist Converter!")
         sys.exit(0)
     else:
+        run_count += 1
         continue
