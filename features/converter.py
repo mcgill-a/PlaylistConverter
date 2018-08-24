@@ -61,7 +61,8 @@ def remove_extension(file_name):
         no_ext = file_name[:-4]
         return no_ext
     else:
-        return ""
+        print("Error: Invalid file extension for output playlist")
+        sys.exit(0)
 
 
 # Get a name for the playlist output
