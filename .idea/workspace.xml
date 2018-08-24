@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="59a410b9-893b-47e7-9335-7db7730b0418" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/features/remover.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converter/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/features/converter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/features/converter.py" beforeDir="false" afterPath="$PROJECT_DIR$/features/converter.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -68,34 +67,36 @@
         <counts>
           <entry key="Python Console" value="44" />
           <entry key="dummy" value="87" />
-          <entry key="py" value="8699" />
+          <entry key="py" value="9374" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="87" />
-          <entry key="Python" value="8743" />
+          <entry key="Python" value="9418" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/features/converter.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="391">
+              <caret line="23" column="18" lean-forward="true" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
-                <marker date="1535120351621" expanded="true" signature="1731:1732" ph="..." />
-                <marker date="1535120351621" expanded="true" signature="1754:2065" ph="..." />
-                <marker date="1535120351621" expanded="true" signature="5657:5658" ph="..." />
+                <marker date="1535121485688" expanded="true" signature="357:358" ph="..." />
+                <marker date="1535121485688" expanded="true" signature="2018:2019" ph="..." />
+                <marker date="1535121485688" expanded="true" signature="2041:2352" ph="..." />
+                <marker date="1535121485688" expanded="true" signature="5944:5945" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/features/remover.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="170">
@@ -127,6 +128,8 @@
       <find>playlist_in</find>
       <find>program ex</find>
       <find>attempt_count</find>
+      <find>confirm</find>
+      <find>yes</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -143,8 +146,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="825" />
-    <option name="width" value="1102" />
+    <option name="x" value="755" />
+    <option name="width" value="1172" />
     <option name="height" value="1047" />
   </component>
   <component name="ProjectLevelVcsManager">
@@ -224,12 +227,12 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="C:\Users\AlexM\AppData\Local\Programs\Python\Python37\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/converter" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/features" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\AlexM\Documents\GitHub\PlaylistConverter\converter\converter.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/features/converter.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -258,15 +261,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="825" y="0" width="1102" height="1047" extended-state="0" />
+    <frame x="755" y="0" width="1172" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20112781" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18871252" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32932165" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.31619257" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.31619257" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -285,24 +288,26 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/main.py" />
-    <entry file="file://$PROJECT_DIR$/features/converter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-            <marker date="1535120351621" expanded="true" signature="1731:1732" ph="..." />
-            <marker date="1535120351621" expanded="true" signature="1754:2065" ph="..." />
-            <marker date="1535120351621" expanded="true" signature="5657:5658" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/features/remover.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="14" lean-forward="true" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/features/converter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="18" lean-forward="true" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+            <marker date="1535121485688" expanded="true" signature="357:358" ph="..." />
+            <marker date="1535121485688" expanded="true" signature="2018:2019" ph="..." />
+            <marker date="1535121485688" expanded="true" signature="2041:2352" ph="..." />
+            <marker date="1535121485688" expanded="true" signature="5944:5945" ph="..." />
           </folding>
         </state>
       </provider>

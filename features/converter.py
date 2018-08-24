@@ -12,8 +12,16 @@ import eyed3
 BOLD_START = '\033[1m'
 BOLD_END = '\033[0m'
 
-music_library = "E:\A\Music\Library"  # will eventually be specified by user
 playlist_output_dir = "E:\A\Music\_python-playlists"  # will eventually be specified by user
+
+
+# Get the path of the user music library directory
+def get_music_library():
+    library = input("Please enter the absolute path of the music library:\n")
+    while not os.path.isdir(library):
+        library = input("Please enter the absolute path of the music library:\n")
+    print("Music library was successfully set to '" + library + "'")
+    return library
 
 
 # Get the input playlist path
@@ -161,6 +169,7 @@ attempt_count = ""
 while True:
     print("------------------ Playlist Converter ------------------")
 
+    music_library = get_music_library()
     output_format = absolute_or_relative()
     playlist_in = get_playlist()
     playlist_name = get_output_name()
