@@ -45,15 +45,23 @@ def get_playlist():
 
 
 # Get the file extension from the playlist
-def get_extension(ext):
+def get_extension(file_name):
     # Reverse the filename to check whether it has a .m3u extension
     # If length is not more than 4 then it physically cannot have a .m3u extension
     rev = ""
-    if len(ext) > 4:
-        rev = ext[::-1]
+    if len(file_name) > 4:
+        rev = file_name[::-1]
         rev = rev[0:4]
         rev = rev[::-1]
     return rev.lower()
+
+
+def remove_extension(file_name):
+    if get_extension(file_name) == ".m3u":
+        no_ext = file_name[:-4]
+        return no_ext
+    else:
+        return ""
 
 
 # Get a name for the playlist output
@@ -123,10 +131,10 @@ def get_playlist_songs():
 def playlist_output():
     playlist_output_path = music_library + "\\" + playlist_name
 
-    counter = 0
+    counter = 1
     while os.path.isfile(playlist_output_path):
         counter += 1
-        playlist_output_path += " (" + str(counter) + ")"
+        playlist_output_path = music_library + "\\" + remove_extension(playlist_name) + " (" + str(counter) + ").m3u"
 
     # Playlist output file operations
     playlist_file_out = open(playlist_output_path, "w", encoding='utf-8')
@@ -152,9 +160,6 @@ def display_results():
 
 
 # Declaring variables
-playlist_in = ""
-playlist_name = ""
-
 output_format = ""
 playlist_in = ""
 playlist_name = ""
@@ -162,9 +167,9 @@ playlist_file = ""
 
 songs = []
 attempt_count = ""
+run_count = 0
 
 # Main program
-run_count = 0
 while True:
     print("------------------ Playlist Converter ------------------")
 
