@@ -35,8 +35,7 @@
 <img src="misc/demo/program.png" width="80%">
 
 ### Output:
-<img src="misc/demo/playlist_titles.png" width="100%">
-<img src="misc/demo/playlist.png" width="100%">
+<img src="misc/demo/playlist_edited.png" width="100%">
 
 ## Meta
 
