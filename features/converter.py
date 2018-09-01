@@ -169,7 +169,7 @@ run_count = 0
 
 # Main program
 while True:
-    print("------------------ Playlist Converter ------------------")
+    print("\n------------------ Playlist Converter ------------------")
 
     if run_count == 0:
         music_library = get_music_library()
