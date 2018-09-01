@@ -8,10 +8,6 @@ import eyed3
  | Latest Update: 24/08/2018
 """
 
-# Bold text formatting codes
-BOLD_START = '\033[1m'
-BOLD_END = '\033[0m'
-
 
 # Get the path of the user music library directory
 def get_music_library():
@@ -56,6 +52,7 @@ def get_extension(file_name):
     return rev.lower()
 
 
+# Remove the extension from the file name
 def remove_extension(file_name):
     if get_extension(file_name) == ".m3u":
         no_ext = file_name[:-4]
@@ -113,7 +110,7 @@ def get_playlist_songs():
             absolute_path = music_library + "\\" + primary_artist + "\\" + album + "\\" + line
             relative_path = primary_artist + "\\" + album + "\\" + line
             if not os.path.isfile(absolute_path.rstrip()):
-                print("Warning: " + absolute_path.rstrip() + " does not exist in music library")
+                print("WARNING: " + absolute_path.rstrip() + " does not exist in music library")
             else:
                 if len(primary_artist) > 0 and len(album) > 0:
                     if output_format == "ABSOLUTE":
@@ -190,9 +187,9 @@ while True:
 
     print("--------------------------------------------------------")
 
-    repeat = input("\nWould you like to convert another playlist? " + BOLD_START + "(YES/NO)" + BOLD_END + ":\n")
+    repeat = input("\nWould you like to convert another playlist? (YES/NO):\n")
     while repeat.upper().strip() not in ["YES", "NO"]:
-        repeat = input("Would you like to convert another playlist? " + BOLD_START + "(YES/NO)" + BOLD_END + ":\n")
+        repeat = input("Would you like to convert another playlist? (YES/NO):\n")
     if repeat.upper().strip() == "NO":
         print("Thanks for using Playlist Converter!")
         sys.exit(0)
