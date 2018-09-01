@@ -23,10 +23,14 @@
 
 ### Windows Command Prompt:
 * (optional) | Add Python to path so 'python' command works regardless of currenty directory: 
-* "set PATH=%PATH%;<C:<...>\Programs\Python\Python37>"
+```
+set PATH=%PATH%;<...>\Programs\Python\Python37
+```
 
 * Set the current directory to the location of the converter and run the converter:
-* "python converter.py"
+```
+python converter.py
+```
 
 
 ## Demo
